@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>情人节快乐</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #ffb6c1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4em;
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff1493;
+            animation: fall linear forwards;
+            pointer-events: none;
+        }
+
+        .petal {
+            position: absolute;
+            color: #ff69b4;
+            animation: sway 8s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sway {
+            0% {
+                transform: translateY(-10vh) translateX(0px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(110vh) translateX(300px) rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%) translateY(0);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text">小雨宝宝情人节快乐 ❤️</div>
+
+    <script>
+        // 创建爱心
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // 创建花瓣
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.innerHTML = '🌸';
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+            petal.style.fontSize = Math.random() * 20 + 15 + 'px';
+            document.body.appendChild(petal);
+            
+            setTimeout(() => {
+                petal.remove();
+            }, 8000);
+        }
+
+        // 定时生成元素
+        setInterval(createHeart, 300);
+        setInterval(createPetal, 500);
+
+        // 背景渐变动画
+        let hue = 0;
+        setInterval(() => {
+            document.body.style.background = `hsl(${hue++}, 50%, 95%)`;
+            if(hue >= 360) hue = 0;
+        }, 50);
+    </script>
+</body>
+</html>
